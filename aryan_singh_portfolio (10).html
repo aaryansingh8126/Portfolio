@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Singh — Performance & Digital Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ec;
+    --cream: #ede8df;
+    --gold: #c9a84c;
+    --gold-light: #e8c96b;
+    --rust: #b54a2f;
+    --teal: #1a6b6b;
+    --text-dim: #7a7570;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+    opacity: 0.6;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9000;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    background: rgba(10,10,10,0.7);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 160px 48px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 9vw, 128px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-name span { color: var(--gold); }
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-dim);
+    max-width: 420px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: 14px 32px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: background 0.3s, transform 0.2s;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 14px 32px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: none;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-visual {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-circle {
+    width: 500px; height: 500px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    position: absolute;
+    animation: rotateSlow 30s linear infinite;
+  }
+  .hero-circle:nth-child(2) {
+    width: 360px; height: 360px;
+    border-color: rgba(201,168,76,0.15);
+    animation-direction: reverse;
+    animation-duration: 20s;
+  }
+  .hero-circle:nth-child(3) {
+    width: 220px; height: 220px;
+    border-color: rgba(201,168,76,0.3);
+    animation-duration: 12s;
+  }
+  .hero-metrics {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 300px;
+  }
+  .metric-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .metric-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .metric-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .hero-line {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* SECTIONS */
+  section { padding: 120px 48px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1;
+    margin-bottom: 64px;
+    letter-spacing: 1px;
+  }
+  .section-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  /* EXPERTISE GRID */
+  .expertise { background: #0d0d0d; }
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .expertise-card {
+    background: var(--black);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+  .expertise-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s;
+  }
+  .expertise-card:hover { background: #111; }
+  .expertise-card:hover::before { height: 100%; }
+  .expertise-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(201,168,76,0.12);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.4s;
+  }
+  .expertise-card:hover .expertise-num { color: rgba(201,168,76,0.25); }
+  .expertise-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .expertise-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+  .expertise-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+  .expertise-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .expertise-card:hover .tag { border-color: rgba(201,168,76,0.4); color: var(--gold); }
+
+  /* BRANDS SECTION */
+  .brands-section { background: var(--black); }
+  .brands-marquee-wrap {
+    overflow: hidden;
+    margin-bottom: 80px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .brands-marquee {
+    display: flex;
+    gap: 64px;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+  .brand-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .brand-item:hover { color: var(--gold); }
+  .brand-item::before { content: '◆'; font-size: 8px; color: var(--gold); }
+
+  /* BRAND CARDS GRID */
+  .brand-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+  .brand-card {
+    background: var(--black);
+    padding: 32px 28px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+  }
+  .brand-card::after {
+    content: '↗';
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 16px;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(4px);
+  }
+  .brand-card:hover { background: #111; }
+  .brand-card:hover::after { opacity: 1; transform: translateY(0); }
+  .brand-card-sector {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .brand-card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .brand-card-url {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
+  /* CASE STUDY CARDS */
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  .case-card {
+    position: relative;
+    padding: 56px 48px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: #0d0d0d;
+    transition: background 0.3s;
+  }
+  .case-card:first-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .case-card:hover { background: #111; }
+  .case-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .case-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .case-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .case-title a:hover { color: var(--gold); }
+  .case-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+  .case-results { display: flex; gap: 32px; }
+  .case-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .case-stat-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    margin-top: 24px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+    cursor: none;
+  }
+  .case-link:hover { border-color: var(--gold); }
+  .case-visual { display: flex; flex-direction: column; gap: 16px; }
+  .funnel-step { display: flex; align-items: center; gap: 16px; }
+  .funnel-bar-wrap {
+    flex: 1;
+    height: 36px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+  }
+  .funnel-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--teal));
+    opacity: 0.7;
+    position: absolute;
+    left: 0; top: 0;
+    transition: width 1.5s ease;
+  }
+  .funnel-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    width: 100px;
+    text-align: right;
+  }
+  .funnel-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--white);
+    width: 50px;
+  }
+
+  /* STRATEGY */
+  .strategy-section { background: #0d0d0d; }
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .strategy-left { position: sticky; top: 120px; }
+  .strategy-right { display: flex; flex-direction: column; gap: 1px; }
+  .strategy-item {
+    border: 1px solid var(--border);
+    padding: 40px;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    transition: background 0.3s;
+  }
+  .strategy-item:hover { background: #111; }
+  .strategy-item-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: rgba(255,255,255,0.03);
+    position: absolute;
+    top: -10px; right: 20px;
+    line-height: 1;
+  }
+  .strategy-item-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .strategy-item-title span { color: var(--gold); }
+  .strategy-item-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .strategy-pillars { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .pillar::before { content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+  /* SKILLS */
+  .skills-section { background: var(--black); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+  .skill-block {
+    background: var(--black);
+    padding: 36px 28px;
+    transition: background 0.3s;
+  }
+  .skill-block:hover { background: #111; }
+  .skill-block-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .skill-list li {
+    font-size: 13px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+  }
+  .skill-block:hover .skill-list li { color: var(--white); }
+  .skill-list li::before { content: '→'; color: var(--gold); font-size: 11px; }
+
+  /* CERTS */
+  .certs-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cert-badge {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: rgba(201,168,76,0.04);
+    transition: all 0.3s;
+  }
+  .cert-badge:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--black);
+    text-align: center;
+    padding: 160px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-section::before {
+    content: 'CONNECT';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 300px;
+    color: rgba(201,168,76,0.03);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 10px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .contact-email {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 5vw, 60px);
+    color: var(--gold);
+    letter-spacing: 2px;
+    display: block;
+    margin: 32px 0 48px;
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .contact-email:hover { color: var(--gold-light); }
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .contact-item {
+    font-size: 13px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .contact-item a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .contact-item a:hover { color: var(--gold); }
+  .contact-item span { color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #050505;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    section { padding: 80px 24px; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .brand-cards-grid { grid-template-columns: 1fr 1fr; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .case-card:first-child { grid-column: 1; display: block; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .strategy-grid { grid-template-columns: 1fr; }
+    .strategy-left { position: static; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .brand-cards-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ARYAN SINGH</div>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#strategy">Strategy</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-tag">Performance & Digital Marketing</div>
+    <h1 class="hero-name">ARYAN<br><span>SINGH</span></h1>
+    <p class="hero-desc">Performance Marketing Specialist driving ROI-focused growth across Meta Ads, SEO/AEO/GEO, Social Media, Website Development, and Content Strategy — for brands in Skincare, Wellness, Fashion, Real Estate, and more.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-circle"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-metrics">
+        <div class="metric-card">
+          <div class="metric-num">11+</div>
+          <div class="metric-label">Brands Worked</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">3X</div>
+          <div class="metric-label">Avg ROAS Growth</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">↓40%</div>
+          <div class="metric-label">CPL Reduction</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">6</div>
+          <div class="metric-label">Sectors Mastered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-line"></div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise" id="expertise">
+  <div class="section-label">What I Do</div>
+  <h2 class="section-title">Core <em>Expertise</em></h2>
+  <div class="expertise-grid reveal">
+    <div class="expertise-card">
+      <div class="expertise-num">01</div>
+      <span class="expertise-icon">📡</span>
+      <div class="expertise-title">Performance Marketing</div>
+      <div class="expertise-desc">End-to-end paid media strategy across Meta and Google. Full-funnel frameworks built for awareness, consideration, and conversion — with tight control on ROAS, CPA, and CPL.</div>
+      <div class="expertise-tags">
+        <span class="tag">Meta Ads</span><span class="tag">Google Ads</span><span class="tag">PPC</span><span class="tag">Lead Gen</span><span class="tag">A/B Testing</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-num">02</div>
+      <span class="expertise-icon">🔍</span>
+      <div class="expertise-title">SEO · AEO · GEO</div>
+      <div class="expertise-desc">Complete search ecosystem coverage — from technical audits and on-page optimization to Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for AI-first search visibility.</div>
+      <div class="expertise-tags">
+        <span class="tag">On-Page SEO</span><span class="tag">Technical SEO</span><span class="tag">AEO</span><span class="tag">GEO</span><span class="tag">Link Building</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-num">03</div>
+      <span class="expertise-icon">📱</span>
+      <div class="expertise-title">Social Media Marketing</div>
+      <div class="expertise-desc">Strategic social media management across Instagram, Facebook, LinkedIn, YouTube and TikTok. Content planning, community building, and performance analytics that build brands — not just audiences.</div>
+      <div class="expertise-tags">
+        <span class="tag">Instagram</span><span class="tag">Facebook</span><span class="tag">LinkedIn</span><span class="tag">YouTube</span><span class="tag">Content</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-num">04</div>
+      <span class="expertise-icon">💻</span>
+      <div class="expertise-title">Website Design & Development</div>
+      <div class="expertise-desc">High-converting websites built on Shopify, WordPress, and WooCommerce. Responsive, fast, and designed around user journeys — with CRO baked in from the first wireframe.</div>
+      <div class="expertise-tags">
+        <span class="tag">Shopify</span><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">CRO</span><span class="tag">UI/UX</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-num">05</div>
+      <span class="expertise-icon">📝</span>
+      <div class="expertise-title">Content Strategy</div>
+      <div class="expertise-desc">Brand storytelling through compelling copy, visual content, and strategic distribution. From product launches to thought leadership — content engineered to convert, not just inform.</div>
+      <div class="expertise-tags">
+        <span class="tag">Copywriting</span><span class="tag">Brand Voice</span><span class="tag">Canva</span><span class="tag">Campaigns</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-num">06</div>
+      <span class="expertise-icon">📊</span>
+      <div class="expertise-title">Analytics & Tracking</div>
+      <div class="expertise-desc">Pixel-perfect tracking infrastructure. GA4, GTM, Meta Pixel, CAPI, and Microsoft Clarity configured for zero data leakage. Turn raw events into revenue-driving insights.</div>
+      <div class="expertise-tags">
+        <span class="tag">GA4</span><span class="tag">GTM</span><span class="tag">Meta Pixel</span><span class="tag">CAPI</span><span class="tag">Clarity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS + CASE STUDIES -->
+<section class="brands-section" id="work">
+  <div class="section-label">Brand Portfolio</div>
+  <h2 class="section-title reveal">Brands <em>I've Grown</em></h2>
+
+  <!-- Scrolling Marquee -->
+  <div class="brands-marquee-wrap">
+    <div class="brands-marquee">
+      <a href="https://200percent.in" target="_blank" rel="noopener" class="brand-item">200% Percent</a>
+      <a href="https://m-organic.com" target="_blank" rel="noopener" class="brand-item">M-Organics</a>
+      <a href="https://crewlinkcanada.com" target="_blank" rel="noopener" class="brand-item">CrewLink Canada</a>
+      <a href="https://reearthy.com" target="_blank" rel="noopener" class="brand-item">ReEarthy</a>
+      <a href="https://climaxtra.com" target="_blank" rel="noopener" class="brand-item">Climaxtra</a>
+      <a href="https://doublethread.in" target="_blank" rel="noopener" class="brand-item">Double Thread</a>
+      <a href="https://thevedart.shop" target="_blank" rel="noopener" class="brand-item">The Vedart</a>
+      <a href="https://dhaama.com" target="_blank" rel="noopener" class="brand-item">Dhaama</a>
+      <a href="https://indoglobalgrowth.com" target="_blank" rel="noopener" class="brand-item">IGGP</a>
+      <a href="https://airportenclave.com" target="_blank" rel="noopener" class="brand-item">Airport Enclave</a>
+      <a href="https://itsindiacongress.com" target="_blank" rel="noopener" class="brand-item">ITS India Congress</a>
+      <!-- duplicate for seamless loop -->
+      <a href="https://200percent.in" target="_blank" rel="noopener" class="brand-item">200% Percent</a>
+      <a href="https://m-organic.com" target="_blank" rel="noopener" class="brand-item">M-Organics</a>
+      <a href="https://crewlinkcanada.com" target="_blank" rel="noopener" class="brand-item">CrewLink Canada</a>
+      <a href="https://reearthy.com" target="_blank" rel="noopener" class="brand-item">ReEarthy</a>
+      <a href="https://climaxtra.com" target="_blank" rel="noopener" class="brand-item">Climaxtra</a>
+      <a href="https://doublethread.in" target="_blank" rel="noopener" class="brand-item">Double Thread</a>
+      <a href="https://thevedart.shop" target="_blank" rel="noopener" class="brand-item">The Vedart</a>
+      <a href="https://dhaama.com" target="_blank" rel="noopener" class="brand-item">Dhaama</a>
+      <a href="https://indoglobalgrowth.com" target="_blank" rel="noopener" class="brand-item">IGGP</a>
+      <a href="https://airportenclave.com" target="_blank" rel="noopener" class="brand-item">Airport Enclave</a>
+      <a href="https://itsindiacongress.com" target="_blank" rel="noopener" class="brand-item">ITS India Congress</a>
+    </div>
+  </div>
+
+  <!-- Brand Cards Grid with Links -->
+  <div class="brand-cards-grid reveal">
+    <a href="https://200percent.in" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Luxury Skincare D2C</div>
+      <div class="brand-card-name">200% Percent</div>
+      <div class="brand-card-url">200percent.in</div>
+    </a>
+    <a href="https://m-organic.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Luxury Skincare & Wellness</div>
+      <div class="brand-card-name">M-Organics</div>
+      <div class="brand-card-url">m-organic.com</div>
+    </a>
+    <a href="https://crewlinkcanada.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Travel & Recruitment Agency</div>
+      <div class="brand-card-name">CrewLink Canada</div>
+      <div class="brand-card-url">crewlinkcanada.com</div>
+    </a>
+    <a href="https://reearthy.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Organic Skincare</div>
+      <div class="brand-card-name">ReEarthy Organics</div>
+      <div class="brand-card-url">reearthy.com</div>
+    </a>
+    <a href="https://climaxtra.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Intimate Wellness</div>
+      <div class="brand-card-name">Climaxtra</div>
+      <div class="brand-card-url">climaxtra.com</div>
+    </a>
+    <a href="https://doublethread.in" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Fashion — Oversized T-Shirts</div>
+      <div class="brand-card-name">Double Thread</div>
+      <div class="brand-card-url">doublethread.in</div>
+    </a>
+    <a href="https://thevedart.shop" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Home Decor & Spiritual Art</div>
+      <div class="brand-card-name">The Vedart</div>
+      <div class="brand-card-url">thevedart.shop</div>
+    </a>
+    <a href="https://dhaama.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Pilgrimage Travel</div>
+      <div class="brand-card-name">Dhaama</div>
+      <div class="brand-card-url">dhaama.com</div>
+    </a>
+    <a href="https://indoglobalgrowth.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Food & Policy Advisory</div>
+      <div class="brand-card-name">IndoGlobal Growth Partners</div>
+      <div class="brand-card-url">indoglobalgrowth.com</div>
+    </a>
+    <a href="https://airportenclave.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Luxury Real Estate</div>
+      <div class="brand-card-name">Airport Enclave</div>
+      <div class="brand-card-url">airportenclave.com</div>
+    </a>
+    <a href="https://itsindiacongress.com" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Policy & AI Summit</div>
+      <div class="brand-card-name">ITS India Congress</div>
+      <div class="brand-card-url">itsindiacongress.com</div>
+    </a>
+    <a href="https://ubjewellerys.in" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Handcrafted Jewellery</div>
+      <div class="brand-card-name">UB Jewellerys</div>
+      <div class="brand-card-url">ubjewellerys.in</div>
+    </a>
+  </div>
+
+  <!-- Featured Case Studies -->
+  <div class="section-label" style="margin-bottom: 32px;">Featured Case Studies</div>
+  <div class="cases-grid">
+
+    <!-- FEATURED: 200% PERCENT -->
+    <div class="case-card reveal">
+      <div>
+        <div class="case-tag">Luxury Skincare D2C — Featured Case</div>
+        <h3 class="case-title"><a href="https://200percent.in" target="_blank" rel="noopener">200% PERCENT</a></h3>
+        <p class="case-desc">Built full performance marketing infrastructure from scratch. Managed Meta Ads campaigns with full-funnel strategy, implemented Shopify website with CRO optimizations, and ran keyword-driven content strategy to grow organic reach alongside paid channels.</p>
+        <div class="case-results">
+          <div class="case-stat">
+            <div class="case-stat-num">3.8×</div>
+            <div class="case-stat-label">ROAS Achieved</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-num">↓42%</div>
+            <div class="case-stat-label">CPL Reduced</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-num">↑68%</div>
+            <div class="case-stat-label">Organic Traffic</div>
+          </div>
+        </div>
+        <a href="https://200percent.in" target="_blank" rel="noopener" class="case-link">Visit Website ↗</a>
+      </div>
+      <div class="case-visual">
+        <div class="funnel-step">
+          <div class="funnel-label">Awareness</div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%"></div></div>
+          <div class="funnel-pct">100%</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-label">Interest</div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:72%"></div></div>
+          <div class="funnel-pct">72%</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-label">Consideration</div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:48%"></div></div>
+          <div class="funnel-pct">48%</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-label">Conversion</div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:22%"></div></div>
+          <div class="funnel-pct">22%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREWLINK CANADA -->
+    <div class="case-card reveal">
+      <div class="case-tag">Canada-Based Recruitment & Travel Agency</div>
+      <h3 class="case-title"><a href="https://crewlinkcanada.com" target="_blank" rel="noopener">CREWLINK CANADA</a></h3>
+      <p class="case-desc">Developed website on WordPress, executed local and international SEO strategy. Managed social media presence and Google Ads campaigns targeting premium audience in North America.</p>
+      <div class="case-results">
+        <div class="case-stat">
+          <div class="case-stat-num">↑120%</div>
+          <div class="case-stat-label">Organic Reach</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">↓35%</div>
+          <div class="case-stat-label">Bounce Rate</div>
+        </div>
+      </div>
+      <a href="https://crewlinkcanada.com" target="_blank" rel="noopener" class="case-link">Visit Website ↗</a>
+    </div>
+
+    <!-- DOUBLE THREAD -->
+    <div class="case-card reveal">
+      <div class="case-tag">Oversized T-Shirt Fashion Brand</div>
+      <h3 class="case-title"><a href="https://doublethread.in" target="_blank" rel="noopener">DOUBLE THREAD</a></h3>
+      <p class="case-desc">Built Shopify store with product page CRO, checkout flow optimization, and Instagram-first social strategy. Executed content campaigns to build brand identity in competitive fashion space.</p>
+      <div class="case-results">
+        <div class="case-stat">
+          <div class="case-stat-num">↑200%</div>
+          <div class="case-stat-label">Instagram Growth</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">2.4×</div>
+          <div class="case-stat-label">Conversion Rate</div>
+        </div>
+      </div>
+      <a href="https://doublethread.in" target="_blank" rel="noopener" class="case-link">Visit Website ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- MARKETING STRATEGY -->
+<section class="strategy-section" id="strategy">
+  <div class="section-label">How I Think</div>
+  <div class="strategy-grid">
+    <div class="strategy-left">
+      <h2 class="section-title" style="margin-bottom:24px;">My <em>Marketing<br>Framework</em></h2>
+      <p style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:32px;">Every brand I work with gets a custom growth system — not templated tactics. Here's how I build marketing that compounds.</p>
+      <div class="strategy-pillars">
+        <div class="pillar">Data before decisions</div>
+        <div class="pillar">Full-funnel thinking</div>
+        <div class="pillar">Test, learn, scale</div>
+        <div class="pillar">Organic + Paid synergy</div>
+        <div class="pillar">Brand + performance balance</div>
+      </div>
+    </div>
+    <div class="strategy-right">
+      <div class="strategy-item reveal">
+        <div class="strategy-item-num">01</div>
+        <div class="strategy-item-title"><span>◆</span> Brand Audit & Discovery</div>
+        <p class="strategy-item-body">Deep dive into brand positioning, competitive landscape, audience psychographics, and existing channel performance. I find the gaps and opportunities before spending a single rupee on ads.</p>
+      </div>
+      <div class="strategy-item reveal">
+        <div class="strategy-item-num">02</div>
+        <div class="strategy-item-title"><span>◆</span> Full-Funnel Architecture</div>
+        <p class="strategy-item-body">Build awareness → interest → consideration → conversion pipelines. Every touchpoint mapped and tracked. Paid media amplifies what organic content establishes. Nothing runs in silos.</p>
+      </div>
+      <div class="strategy-item reveal">
+        <div class="strategy-item-num">03</div>
+        <div class="strategy-item-title"><span>◆</span> Content & SEO Foundation</div>
+        <p class="strategy-item-body">Content strategy that serves both humans and search engines — including traditional SEO, AEO for featured snippets, and GEO for AI search visibility. Website optimized for speed, UX, and conversion.</p>
+      </div>
+      <div class="strategy-item reveal">
+        <div class="strategy-item-num">04</div>
+        <div class="strategy-item-title"><span>◆</span> Social Media Ecosystem</div>
+        <p class="strategy-item-body">Platform-specific content strategy built around brand voice and audience behavior. Community management, posting cadence, creative testing, and performance analytics that drive real engagement.</p>
+      </div>
+      <div class="strategy-item reveal">
+        <div class="strategy-item-num">05</div>
+        <div class="strategy-item-title"><span>◆</span> Tracking & Optimization</div>
+        <p class="strategy-item-body">Pixel-accurate tracking via GA4, GTM, Meta Pixel & CAPI. Weekly performance reviews with actionable insights. A/B testing creative, audiences, and landing pages continuously. Scale what works, kill what doesn't.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS & CERTS -->
+<section class="skills-section" id="skills">
+  <div class="section-label">Toolkit</div>
+  <h2 class="section-title reveal">Skills & <em>Certifications</em></h2>
+  <div class="skills-grid reveal">
+    <div class="skill-block">
+      <div class="skill-block-title">Paid Media</div>
+      <ul class="skill-list">
+        <li>Meta Ads Manager</li>
+        <li>Google Ads (Search, Display, Shopping, Video)</li>
+        <li>Lead Generation Campaigns</li>
+        <li>Audience Segmentation</li>
+        <li>ROAS & CPA Optimization</li>
+        <li>Retargeting Strategies</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">SEO / AEO / GEO</div>
+      <ul class="skill-list">
+        <li>On-Page & Technical SEO</li>
+        <li>Keyword Research</li>
+        <li>Link Building</li>
+        <li>Website Audits</li>
+        <li>SEMrush & Rank Math</li>
+        <li>Answer Engine Optimization</li>
+        <li>Generative Engine Optimization</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Web & Analytics</div>
+      <ul class="skill-list">
+        <li>Shopify & WooCommerce</li>
+        <li>WordPress Development</li>
+        <li>Google Analytics (GA4)</li>
+        <li>Google Tag Manager</li>
+        <li>Meta Pixel & CAPI</li>
+        <li>Microsoft Clarity</li>
+        <li>CRO & Landing Pages</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Social & Content</div>
+      <ul class="skill-list">
+        <li>Instagram & Facebook</li>
+        <li>LinkedIn & YouTube</li>
+        <li>Content Planning & Calendar</li>
+        <li>Community Management</li>
+        <li>Canva & Visual Design</li>
+        <li>Brand Copywriting</li>
+        <li>Campaign Storytelling</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section-label" style="margin-bottom:24px;">Certifications</div>
+  <div class="certs-row reveal">
+    <span class="cert-badge">Digital Marketing Expert — STAENZ</span>
+    <span class="cert-badge">Google Analytics GA4</span>
+    <span class="cert-badge">Google Search Ads</span>
+    <span class="cert-badge">Google Display Ads</span>
+    <span class="cert-badge">Google Video Ads</span>
+    <span class="cert-badge">Google Shopping Ads</span>
+    <span class="cert-badge">Google Ad Measurement</span>
+    <span class="cert-badge">Google My Business</span>
+    <span class="cert-badge">Social Media Marketing — HubSpot</span>
+    <span class="cert-badge">Content Marketing — HubSpot</span>
+    <span class="cert-badge">Technical SEO — SEMrush</span>
+    <span class="cert-badge">SEO Fundamentals — SEMrush</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label" style="justify-content:center;text-align:center;">Ready to Grow?</div>
+  <h2 class="section-title" style="margin-bottom:0;">Let's Build<br><em>Something Great</em></h2>
+  <a href="mailto:aaryansingh8126@gmail.com" class="contact-email">aaryansingh8126@gmail.com</a>
+  <div class="contact-info">
+    <div class="contact-item">📍 <span>Ghaziabad, UP, India</span></div>
+    <div class="contact-item">📞 <span>+91-8126034699</span></div>
+    <div class="contact-item">💼 <span>Open to Full-Time</span></div>
+    <div class="contact-item">🔗 <a href="https://www.linkedin.com/in/aaryansinghdm/" target="_blank" rel="noopener">LinkedIn — Aryan Singh</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ARYAN SINGH</div>
+  <div class="footer-text">Performance Marketing · SEO · Social Media · Web Development</div>
+  <div class="footer-text">© 2025 — All Rights Reserved</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
