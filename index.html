@@ -17,10 +17,10 @@
     --text-dim: #7a7570;
     --border: rgba(201,168,76,0.25);
   }
-
+ 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
+ 
   body {
     background: var(--black);
     color: var(--white);
@@ -29,7 +29,7 @@
     overflow-x: hidden;
     cursor: none;
   }
-
+ 
   /* Custom cursor */
   .cursor {
     width: 12px; height: 12px;
@@ -55,7 +55,7 @@
     transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
     opacity: 0.6;
   }
-
+ 
   /* NOISE OVERLAY */
   body::before {
     content: '';
@@ -66,7 +66,7 @@
     pointer-events: none;
     z-index: 9000;
   }
-
+ 
   /* NAV */
   nav {
     position: fixed;
@@ -102,7 +102,7 @@
     cursor: none;
   }
   .nav-links a:hover { color: var(--white); }
-
+ 
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -190,7 +190,7 @@
     transition: border-color 0.3s, color 0.3s;
   }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
+ 
   .hero-right {
     position: relative;
     display: flex;
@@ -257,10 +257,10 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
-
+ 
   /* SECTIONS */
   section { padding: 120px 48px; }
-
+ 
   .section-label {
     font-size: 10px;
     letter-spacing: 4px;
@@ -289,7 +289,7 @@
     font-style: normal;
     color: var(--gold);
   }
-
+ 
   /* EXPERTISE GRID */
   .expertise { background: #0d0d0d; }
   .expertise-grid {
@@ -350,7 +350,7 @@
     transition: border-color 0.3s, color 0.3s;
   }
   .expertise-card:hover .tag { border-color: rgba(201,168,76,0.4); color: var(--gold); }
-
+ 
   /* BRANDS SECTION */
   .brands-section { background: var(--black); }
   .brands-marquee-wrap {
@@ -381,7 +381,7 @@
   }
   .brand-item:hover { color: var(--gold); }
   .brand-item::before { content: '◆'; font-size: 8px; color: var(--gold); }
-
+ 
   /* BRAND CARDS GRID */
   .brand-cards-grid {
     display: grid;
@@ -432,7 +432,7 @@
     color: var(--text-dim);
     letter-spacing: 0.5px;
   }
-
+ 
   /* CASE STUDY CARDS */
   .cases-grid {
     display: grid;
@@ -542,7 +542,7 @@
     color: var(--white);
     width: 50px;
   }
-
+ 
   /* STRATEGY */
   .strategy-section { background: #0d0d0d; }
   .strategy-grid {
@@ -595,7 +595,7 @@
     color: var(--text-dim);
   }
   .pillar::before { content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
-
+ 
   /* SKILLS */
   .skills-section { background: var(--black); }
   .skills-grid {
@@ -634,7 +634,7 @@
   }
   .skill-block:hover .skill-list li { color: var(--white); }
   .skill-list li::before { content: '→'; color: var(--gold); font-size: 11px; }
-
+ 
   /* CERTS */
   .certs-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .cert-badge {
@@ -648,7 +648,7 @@
     transition: all 0.3s;
   }
   .cert-badge:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
-
+ 
   /* CONTACT */
   .contact-section {
     background: var(--black);
@@ -703,7 +703,7 @@
   }
   .contact-item a:hover { color: var(--gold); }
   .contact-item span { color: var(--white); }
-
+ 
   /* FOOTER */
   footer {
     border-top: 1px solid var(--border);
@@ -724,7 +724,7 @@
     color: var(--text-dim);
     letter-spacing: 1px;
   }
-
+ 
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
@@ -738,7 +738,7 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
-
+ 
   /* SCROLL ANIMATIONS */
   .reveal {
     opacity: 0;
@@ -749,7 +749,7 @@
     opacity: 1;
     transform: translateY(0);
   }
-
+ 
   /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
@@ -773,10 +773,10 @@
 </style>
 </head>
 <body>
-
+ 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
+ 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">ARYAN SINGH</div>
@@ -788,7 +788,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
-
+ 
 <!-- HERO -->
 <section class="hero" style="padding:0;">
   <div class="hero-left">
@@ -807,7 +807,7 @@
       <div class="hero-circle"></div>
       <div class="hero-metrics">
         <div class="metric-card">
-          <div class="metric-num">11+</div>
+          <div class="metric-num">14+</div>
           <div class="metric-label">Brands Worked</div>
         </div>
         <div class="metric-card">
@@ -827,7 +827,7 @@
   </div>
   <div class="hero-line"></div>
 </section>
-
+ 
 <!-- EXPERTISE -->
 <section class="expertise" id="expertise">
   <div class="section-label">What I Do</div>
@@ -889,12 +889,12 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- BRANDS + CASE STUDIES -->
 <section class="brands-section" id="work">
   <div class="section-label">Brand Portfolio</div>
   <h2 class="section-title reveal">Brands <em>I've Grown</em></h2>
-
+ 
   <!-- Scrolling Marquee -->
   <div class="brands-marquee-wrap">
     <div class="brands-marquee">
@@ -903,9 +903,9 @@
       <a href="https://crewlinkcanada.com" target="_blank" rel="noopener" class="brand-item">CrewLink Canada</a>
       <a href="https://reearthy.com" target="_blank" rel="noopener" class="brand-item">ReEarthy</a>
       <a href="https://climaxtra.com" target="_blank" rel="noopener" class="brand-item">Climaxtra</a>
-      <a href="https://doublethread.in" target="_blank" rel="noopener" class="brand-item">Double Thread</a>
-      <a href="https://thevedart.shop" target="_blank" rel="noopener" class="brand-item">The Vedart</a>
-      <a href="https://dhaama.com" target="_blank" rel="noopener" class="brand-item">Dhaama</a>
+      <a href="https://greenmedianetwork.in" target="_blank" rel="noopener" class="brand-item">Green Media Network</a>
+      <a href="https://justwhatworks.in" target="_blank" rel="noopener" class="brand-item">JustWhatWorks</a>
+      <a href="https://autocomputerperformance.net" target="_blank" rel="noopener" class="brand-item">Auto Computer Performance</a>
       <a href="https://indoglobalgrowth.com" target="_blank" rel="noopener" class="brand-item">IGGP</a>
       <a href="https://airportenclave.com" target="_blank" rel="noopener" class="brand-item">Airport Enclave</a>
       <a href="https://itsindiacongress.com" target="_blank" rel="noopener" class="brand-item">ITS India Congress</a>
@@ -915,15 +915,15 @@
       <a href="https://crewlinkcanada.com" target="_blank" rel="noopener" class="brand-item">CrewLink Canada</a>
       <a href="https://reearthy.com" target="_blank" rel="noopener" class="brand-item">ReEarthy</a>
       <a href="https://climaxtra.com" target="_blank" rel="noopener" class="brand-item">Climaxtra</a>
-      <a href="https://doublethread.in" target="_blank" rel="noopener" class="brand-item">Double Thread</a>
-      <a href="https://thevedart.shop" target="_blank" rel="noopener" class="brand-item">The Vedart</a>
-      <a href="https://dhaama.com" target="_blank" rel="noopener" class="brand-item">Dhaama</a>
+      <a href="https://greenmedianetwork.in" target="_blank" rel="noopener" class="brand-item">Green Media Network</a>
+      <a href="https://justwhatworks.in" target="_blank" rel="noopener" class="brand-item">JustWhatWorks</a>
+      <a href="https://autocomputerperformance.net" target="_blank" rel="noopener" class="brand-item">Auto Computer Performance</a>
       <a href="https://indoglobalgrowth.com" target="_blank" rel="noopener" class="brand-item">IGGP</a>
       <a href="https://airportenclave.com" target="_blank" rel="noopener" class="brand-item">Airport Enclave</a>
       <a href="https://itsindiacongress.com" target="_blank" rel="noopener" class="brand-item">ITS India Congress</a>
     </div>
   </div>
-
+ 
   <!-- Brand Cards Grid with Links -->
   <div class="brand-cards-grid reveal">
     <a href="https://200percent.in" target="_blank" rel="noopener" class="brand-card">
@@ -951,20 +951,20 @@
       <div class="brand-card-name">Climaxtra</div>
       <div class="brand-card-url">climaxtra.com</div>
     </a>
-    <a href="https://doublethread.in" target="_blank" rel="noopener" class="brand-card">
-      <div class="brand-card-sector">Fashion — Oversized T-Shirts</div>
-      <div class="brand-card-name">Double Thread</div>
-      <div class="brand-card-url">doublethread.in</div>
+    <a href="https://greenmedianetwork.in" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Digital Media & Advertising</div>
+      <div class="brand-card-name">Green Media Network</div>
+      <div class="brand-card-url">greenmedianetwork.in</div>
     </a>
-    <a href="https://thevedart.shop" target="_blank" rel="noopener" class="brand-card">
-      <div class="brand-card-sector">Home Decor & Spiritual Art</div>
-      <div class="brand-card-name">The Vedart</div>
-      <div class="brand-card-url">thevedart.shop</div>
+    <a href="https://justwhatworks.in" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Health & Supplements</div>
+      <div class="brand-card-name">JustWhatWorks</div>
+      <div class="brand-card-url">justwhatworks.in</div>
     </a>
-    <a href="https://dhaama.com" target="_blank" rel="noopener" class="brand-card">
-      <div class="brand-card-sector">Pilgrimage Travel</div>
-      <div class="brand-card-name">Dhaama</div>
-      <div class="brand-card-url">dhaama.com</div>
+    <a href="https://autocomputerperformance.net" target="_blank" rel="noopener" class="brand-card">
+      <div class="brand-card-sector">Auto Parts & Performance</div>
+      <div class="brand-card-name">Auto Computer Performance</div>
+      <div class="brand-card-url">autocomputerperformance.net</div>
     </a>
     <a href="https://indoglobalgrowth.com" target="_blank" rel="noopener" class="brand-card">
       <div class="brand-card-sector">Food & Policy Advisory</div>
@@ -987,11 +987,11 @@
       <div class="brand-card-url">ubjewellerys.in</div>
     </a>
   </div>
-
+ 
   <!-- Featured Case Studies -->
   <div class="section-label" style="margin-bottom: 32px;">Featured Case Studies</div>
   <div class="cases-grid">
-
+ 
     <!-- FEATURED: 200% PERCENT -->
     <div class="case-card reveal">
       <div>
@@ -1037,7 +1037,7 @@
         </div>
       </div>
     </div>
-
+ 
     <!-- CREWLINK CANADA -->
     <div class="case-card reveal">
       <div class="case-tag">Canada-Based Recruitment & Travel Agency</div>
@@ -1055,28 +1055,28 @@
       </div>
       <a href="https://crewlinkcanada.com" target="_blank" rel="noopener" class="case-link">Visit Website ↗</a>
     </div>
-
-    <!-- DOUBLE THREAD -->
+ 
+    <!-- GREEN MEDIA NETWORK -->
     <div class="case-card reveal">
-      <div class="case-tag">Oversized T-Shirt Fashion Brand</div>
-      <h3 class="case-title"><a href="https://doublethread.in" target="_blank" rel="noopener">DOUBLE THREAD</a></h3>
-      <p class="case-desc">Built Shopify store with product page CRO, checkout flow optimization, and Instagram-first social strategy. Executed content campaigns to build brand identity in competitive fashion space.</p>
+      <div class="case-tag">Digital Media & Advertising Network</div>
+      <h3 class="case-title"><a href="https://greenmedianetwork.in" target="_blank" rel="noopener">GREEN MEDIA NETWORK</a></h3>
+      <p class="case-desc">Managed Meta Ads campaigns focused on lead generation with full-funnel dashboard tracking. Optimized audience targeting and creative strategy to drive qualified leads at scale while maintaining efficient CPL.</p>
       <div class="case-results">
         <div class="case-stat">
-          <div class="case-stat-num">↑200%</div>
-          <div class="case-stat-label">Instagram Growth</div>
+          <div class="case-stat-num">↑3X</div>
+          <div class="case-stat-label">Lead Volume</div>
         </div>
         <div class="case-stat">
-          <div class="case-stat-num">2.4×</div>
-          <div class="case-stat-label">Conversion Rate</div>
+          <div class="case-stat-num">↓38%</div>
+          <div class="case-stat-label">CPL Reduced</div>
         </div>
       </div>
-      <a href="https://doublethread.in" target="_blank" rel="noopener" class="case-link">Visit Website ↗</a>
+      <a href="https://greenmedianetwork.in" target="_blank" rel="noopener" class="case-link">Visit Website ↗</a>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <!-- MARKETING STRATEGY -->
 <section class="strategy-section" id="strategy">
   <div class="section-label">How I Think</div>
@@ -1121,7 +1121,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- SKILLS & CERTS -->
 <section class="skills-section" id="skills">
   <div class="section-label">Toolkit</div>
@@ -1191,7 +1191,7 @@
     <span class="cert-badge">SEO Fundamentals — SEMrush</span>
   </div>
 </section>
-
+ 
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="section-label" style="justify-content:center;text-align:center;">Ready to Grow?</div>
@@ -1207,14 +1207,14 @@
     <div class="contact-item">🔗 <a href="https://www.linkedin.com/in/aaryansinghdm/" target="_blank" rel="noopener">LinkedIn — Aryan Singh</a></div>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">ARYAN SINGH</div>
   <div class="footer-text">Performance Marketing · SEO · Social Media · Web Development</div>
   <div class="footer-text">© 2025 — All Rights Reserved</div>
 </footer>
-
+ 
 <script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
@@ -1233,7 +1233,7 @@
     requestAnimationFrame(animateRing);
   }
   animateRing();
-
+ 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {
